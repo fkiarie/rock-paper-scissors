@@ -9,31 +9,36 @@ function getComputerChoice(){
 }
 
 function playGround(userSelection, computerSelection){
+    // refine input
+    const lUserSelection = userSelection.toLowerCase();
+    const lComputerSelection = computerSelection.toLowerCase();
+    //console.log(`user: ${lUserSelection} computer: ${lComputerSelection}`);
+
     //Check for a tie
-    if(userSelection == computerSelection){
-        return `You both selected ${computerSelection}. It is a tie`
-    }else if( userSelection == 'Rock'){  // check between Rock and Scissors
-        if(computerSelection == 'Scissors'){
-            return `${userSelection} smashes ${computerSelection} you win!`;
+    if(lUserSelection == lComputerSelection){
+        return `You both selected ${lComputerSelection}. It is a tie`
+    }else if( lUserSelection == 'rock'){  // check between Rock and Scissors
+        if(lComputerSelection == 'scissors'){
+            return `${lUserSelection} smashes ${lComputerSelection} you win!`;
         } else {
-            return `Paper covers ${userSelection}, You lose!`;
+            return `Paper covers ${lUserSelection}, You lose!`;
         }
-    }else if( userSelection == 'Paper'){ // check between Paper and Rock
-        if(computerSelection == 'Rocks'){
-            return `${userSelection} covers ${computerSelection} you win!`;
+    }else if( lUserSelection == 'paper'){ // check between Paper and Rock
+        if(lComputerSelection == 'rock'){
+            return `${lUserSelection} covers ${lComputerSelection} you win!`;
         } else {
-            return `Scissors cuts ${userSelection}, You lose!`;
+            return `Scissors cuts ${lUserSelection}, You lose!`;
         }
-    }else if( userSelection == 'Scissors'){ // check between Scissor and Paper
-        if(computerSelection == 'Paper'){
-            return `${userSelection} cuts ${computerSelection} you win!`;
+    }else if( lUserSelection == 'scissors'){ // check between Scissor and Paper
+        if(lComputerSelection == 'paper'){
+            return `${lUserSelection} cuts ${lComputerSelection} you win!`;
         } else {
-            return `Rock smashes ${userSelection}, You lose!`;
+            return `Rock smashes ${lUserSelection}, You lose!`;
         }
     }
 }
 
-const playerSelection = 'Scissors';
+const playerSelection = 'PAper';
 const computerSelection = getComputerChoice();
 console.log(`You selected ${playerSelection} and the computer selected ${computerSelection}`);
 console.log(playGround(playerSelection,computerSelection));
