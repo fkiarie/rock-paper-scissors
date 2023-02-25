@@ -3,42 +3,48 @@ console.log("Welcome to the game")
 function getComputerChoice(){
     const choice = ['Rock', 'Paper', 'Scissors'];
     const randomIndex = Math.floor(Math.random() * choice.length);
-    const computerchoice = choice[randomIndex];
+    const computerchoice = choice[randomIndex].toLowerCase();
     return computerchoice;
+}
 
+function userInput(){
+    const validInputs = ['rock' , 'paper' ,'scissors'];
+    const input = prompt("Enter: Rock | Paper | Scissors").toLowerCase();
+
+    if(!validInputs.includes(input)){
+        return `an invalid input: ${input}. Please enter rock, paper or scissors`;
+    }else{
+        return input
+    }
 }
 
 function playGround(userSelection, computerSelection){
-    // refine input
-    const lUserSelection = userSelection.toLowerCase();
-    const lComputerSelection = computerSelection.toLowerCase();
-    //console.log(`user: ${lUserSelection} computer: ${lComputerSelection}`);
-
     //Check for a tie
-    if(lUserSelection == lComputerSelection){
-        return `You both selected ${lComputerSelection}. It is a tie`
-    }else if( lUserSelection == 'rock'){  // check between Rock and Scissors
-        if(lComputerSelection == 'scissors'){
-            return `${lUserSelection} smashes ${lComputerSelection} you win!`;
+    if(userSelection == computerSelection){
+        return `You both selected ${computerSelection}. It is a tie`
+    }else if( userSelection == 'rock'){  // check between Rock and Scissors
+        if(computerSelection == 'scissors'){
+            return `${userSelection} smashes ${computerSelection} you win!`;
         } else {
-            return `Paper covers ${lUserSelection}, You lose!`;
+            return `Paper covers ${userSelection}, You lose!`;
         }
-    }else if( lUserSelection == 'paper'){ // check between Paper and Rock
-        if(lComputerSelection == 'rock'){
-            return `${lUserSelection} covers ${lComputerSelection} you win!`;
+    }else if( userSelection == 'paper'){ // check between Paper and Rock
+        if(computerSelection == 'rock'){
+            return `${userSelection} covers ${computerSelection} you win!`;
         } else {
-            return `Scissors cuts ${lUserSelection}, You lose!`;
+            return `Scissors cuts ${userSelection}, You lose!`;
         }
-    }else if( lUserSelection == 'scissors'){ // check between Scissor and Paper
-        if(lComputerSelection == 'paper'){
-            return `${lUserSelection} cuts ${lComputerSelection} you win!`;
+    }else if( userSelection == 'scissors'){ // check between Scissor and Paper
+        if(computerSelection == 'paper'){
+            return `${userSelection} cuts ${computerSelection} you win!`;
         } else {
-            return `Rock smashes ${lUserSelection}, You lose!`;
+            return `Rock smashes ${userSelection}, You lose!`;
         }
     }
 }
 
-const playerSelection = 'PAper';
+
+const playerSelection = userInput();
 const computerSelection = getComputerChoice();
 console.log(`You selected ${playerSelection} and the computer selected ${computerSelection}`);
 console.log(playGround(playerSelection,computerSelection));
