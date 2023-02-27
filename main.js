@@ -42,9 +42,37 @@ function playGround(userSelection, computerSelection){
         }
     }
 }
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+  
+    for (let i = 1; i <= 5; i++) {
+      const playerSelection = userInput();
+      const computerSelection = getComputerChoice();
+      const roundResult = playGround(playerSelection, computerSelection);
+  
+      console.log(`Round ${i}: You selected ${playerSelection} and the computer selected ${computerSelection}. ${roundResult}`);
+  
+      if (roundResult.includes('win')) {
+        playerScore++;
+      } else if (roundResult.includes('lose')) {
+        computerScore++;
+      }
+    }
+  
+    console.log(`Game over! Your score: ${playerScore}. Computer score: ${computerScore}.`);
+  
+    if (playerScore > computerScore) {
+      console.log("Congratulations! You won the game!");
+    } else if (playerScore < computerScore) {
+      console.log("Sorry, you lost the game. Better luck next time!");
+    } else {
+      console.log("The game is a tie!");
+    }
+  }
+  
 
-
-const playerSelection = userInput();
-const computerSelection = getComputerChoice();
-console.log(`You selected ${playerSelection} and the computer selected ${computerSelection}`);
-console.log(playGround(playerSelection,computerSelection));
+// const playerSelection = userInput();
+// const computerSelection = getComputerChoice();
+// console.log(`You selected ${playerSelection} and the computer selected ${computerSelection}`);
+game();
