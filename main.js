@@ -1,5 +1,9 @@
 console.log("Welcome to the game")
 
+let playerScore = 0;
+let computerScore = 0;
+const messageContainer = document.getElementById("messageContainer");
+
 function getComputerChoice(){
     const choice = ['Rock', 'Paper', 'Scissors'];
     const randomIndex = Math.floor(Math.random() * choice.length);
@@ -30,29 +34,58 @@ function userInputButtons(){
         playGround(playerSelection,computerSelection);
     });
 }
-function playGround(userSelection, computerSelection){
-    //Check for a tie
-    if(userSelection == computerSelection){
-        console.log(`You both selected ${computerSelection}. It is a tie`);
-    }else if( userSelection == 'rock'){  // check between Rock and Scissors
-        if(computerSelection == 'scissors'){
-            console.log(`${userSelection} smashes ${computerSelection} you win!`);
-        } else {
-            console.log(`Paper covers ${userSelection}, You lose!`);
-        }
-    }else if( userSelection == 'paper'){ // check between Paper and Rock
-        if(computerSelection == 'rock'){
-            console.log(`${userSelection} covers ${computerSelection} you win!`);
-        } else {
-            console.log(`Scissors cuts ${userSelection}, You lose!`);
-        }
-    }else if( userSelection == 'scissors'){ // check between Scissor and Paper
-        if(computerSelection == 'paper'){
-            console.log(`${userSelection} cuts ${computerSelection} you win!`);
-        } else {
-            console.log(`Rock smashes ${userSelection}, You lose!`);
-        }
+function announceWinner() {
+  if (playerScore === 5) {
+    displayMessage("Congratulations! You won the game!");
+    resetGame();
+  } else if (computerScore === 5) {
+    displayMessage("You lost the game. Better luck next time!");
+    resetGame();
+  }
+}
+function displayMessage(message) {
+  const messageElement = document.createElement("p");
+  messageElement.textContent = message;
+  messageContainer.appendChild(messageElement);
+}
+
+function resetGame() {
+  playerScore = 0;
+  computerScore = 0;
+}
+
+function playGround(userSelection, computerSelection) {
+  // Check for a tie
+  if (userSelection === computerSelection) {
+    displayMessage(`You both selected ${computerSelection}. It's a tie!`);
+  } else if (userSelection === 'rock') {  // check between Rock and Scissors
+    if (computerSelection === 'scissors') {
+      displayMessage(`${userSelection} smashes ${computerSelection}. You win!`);
+      playerScore++;
+    } else {
+      displayMessage(`Paper covers ${userSelection}. You lose!`);
+      computerScore++;
     }
+  } else if (userSelection === 'paper') { // check between Paper and Rock
+    if (computerSelection === 'rock') {
+      displayMessage(`${userSelection} covers ${computerSelection}. You win!`);
+      playerScore++;
+    } else {
+      displayMessage(`Scissors cuts ${userSelection}. You lose!`);
+      computerScore++;
+    }
+  } else if (userSelection === 'scissors') { // check between Scissor and Paper
+    if (computerSelection === 'paper') {
+      displayMessage(`${userSelection} cuts ${computerSelection}. You win!`);
+      playerScore++;
+    } else {
+      displayMessage(`Rock smashes ${userSelection}. You lose!`);
+      computerScore++;
+    }
+  }
+
+  displayMessage(`Player Score: ${playerScore} - Computer Score: ${computerScore}`);
+  announceWinner();
 }
 
 userInputButtons();
